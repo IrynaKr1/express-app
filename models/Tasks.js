@@ -110,6 +110,12 @@ class TasksDB {
 
     return findTaskbyId === -1 ? null : this.tasks[findTaskbyId];
   }
+
+  deleteTask (id) {
+    const foundTaskById = this.tasks.findIndex(t => t.id === id);
+
+    return foundTaskById === -1 ? null : this.tasks.splice(foundTaskById, 1);
+  }
 }
 
 const tasksDbInstance = new TasksDB(tasksDB);

@@ -19,4 +19,6 @@ app.post('/tasks', tasksController.createTask);
 
 app.patch('/tasks/:id', tasksController.updateTaskById);
 
+app.delete('/tasks/:id', tasksController.deleteTaskById);
+
 module.exports = app;

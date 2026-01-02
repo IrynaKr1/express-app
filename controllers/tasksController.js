@@ -37,3 +37,15 @@ module.exports.updateTaskById = (req, res) => {
   }
   res.status(404).send('Task dod not exist');
 };
+
+module.exports.deleteTaskById = (req, res) => {
+  const { id } = req.params;
+
+  const deleteTask = TasksDB.deleteTask(id);
+
+  if (deleteTask) {
+    return res.status(204).send();
+  }
+
+  res.status(404).send('Task did not find');
+};
