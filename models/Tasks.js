@@ -75,6 +75,10 @@ class TasksDB {
   constructor (arr) {
     this.tasks = [...arr];
   }
+
+  getTasks () {
+    return [...this.tasks];
+  }
 }
 
 const tasksDbInstance = new TasksDB(tasksDB);
