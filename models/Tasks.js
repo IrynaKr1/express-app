@@ -97,6 +97,19 @@ class TasksDB {
     });
     return this.tasks[this.tasks.length - 1];
   }
+
+  updateTask (id, values) {
+    const findTaskbyId = this.tasks.findIndex(t => t.id === id);
+
+    if (findTaskbyId !== -1) {
+      this.tasks[findTaskbyId] = {
+        ...this.tasks[findTaskbyId],
+        ...values,
+      };
+    }
+
+    return findTaskbyId === -1 ? null : this.tasks[findTaskbyId];
+  }
 }
 
 const tasksDbInstance = new TasksDB(tasksDB);

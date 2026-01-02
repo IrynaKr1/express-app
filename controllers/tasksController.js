@@ -1,4 +1,3 @@
-const { response } = require('../app');
 const { TasksDB } = require('./../models');
 
 module.exports.getTasks = (req, res) => {
@@ -23,4 +22,18 @@ module.exports.createTask = (req, res) => {
   const createTask = TasksDB.createTask(body);
 
   res.status(201).send(createTask);
+};
+
+module.exports.updateTaskById = (req, res) => {
+  const {
+    params: { id },
+    body,
+  } = req;
+
+  const updateTask = TasksDB.updateTask(id, body);
+
+  if (updateTask) {
+    return res.status(200).send(updateTask);
+  }
+  res.status(404).send('Task dod not exist');
 };
