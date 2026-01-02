@@ -1,3 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
+const { format } = require('date-fns');
+
 const tasksDB = [
   {
     id: '1',
@@ -83,6 +86,16 @@ class TasksDB {
   getTaskById (id) {
     const findTaskById = this.tasks.findIndex(t => t.id === id);
     return findTaskById === -1 ? null : this.tasks[findTaskById];
+  }
+
+  createTask (newTask) {
+    this.tasks.push({
+      ...newTask,
+      id: uuidv4(),
+      isDone: false,
+      createdAt: format(new Date(), 'yyyy-MM-dd'),
+    });
+    return this.tasks[this.tasks.length - 1];
   }
 }
 

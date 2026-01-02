@@ -16,3 +16,11 @@ module.exports.getTaskById = (req, res) => {
   }
   res.status(404).send('Task did not exist');
 };
+
+module.exports.createTask = (req, res) => {
+  const { body } = req;
+
+  const createTask = TasksDB.createTask(body);
+
+  res.status(201).send(createTask);
+};

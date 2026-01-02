@@ -15,4 +15,6 @@ app.get('/tasks', tasksController.getTasks);
 
 app.get('/tasks/:id', tasksController.getTaskById);
 
+app.post('/tasks', tasksController.createTask);
+
 module.exports = app;
