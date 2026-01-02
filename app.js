@@ -1,6 +1,7 @@
 const { tasksController } = require('./controllers');
 
 const express = require('express');
+const { TasksDB } = require('./models');
 
 const app = express();
 
@@ -11,5 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/tasks', tasksController.getTasks);
+
+app.get('/tasks/:id', tasksController.getTaskById);
 
 module.exports = app;
