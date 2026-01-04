@@ -11,7 +11,7 @@ module.exports.validateTaskOnCreate = async (req, res, next) => {
     req.body = validatedTask;
     next();
   } catch (error) {
-    console.log('error', error);
+    next(error);
   }
 };
 
@@ -23,6 +23,6 @@ module.exports.validateTaskOnUpdate = async (req, res, next) => {
     req.body = validatedTask;
     next();
   } catch (error) {
-    console.log('error', error);
+    next(error);
   }
 };

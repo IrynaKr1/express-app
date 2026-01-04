@@ -1,11 +1,13 @@
+const createError = require('http-errors');
 const { TasksDB } = require('./../models');
 
 module.exports.getTasks = (req, res) => {
-  const tasks = TasksDB.getTasks();
+  const { page = 1, results = 5 } = req.query;
+  const tasks = TasksDB.getTasks(page, results);
   res.status(200).send(tasks);
 };
 
-module.exports.getTaskById = (req, res) => {
+module.exports.getTaskById = (req, res, next) => {
   const { id } = req.params;
 
   const foundTask = TasksDB.getTaskById(id);
@@ -13,7 +15,7 @@ module.exports.getTaskById = (req, res) => {
   if (foundTask) {
     return res.status(200).send(foundTask);
   }
-  res.status(404).send('Task did not exist');
+  next(createError(404, 'Task did not found'));
 };
 
 module.exports.createTask = (req, res) => {
@@ -35,7 +37,7 @@ module.exports.updateTaskById = (req, res) => {
   if (updateTask) {
     return res.status(200).send(updateTask);
   }
-  res.status(404).send('Task dod not exist');
+  next(createError(404, 'Task did not exist'));
 };
 
 module.exports.deleteTaskById = (req, res) => {
@@ -47,5 +49,5 @@ module.exports.deleteTaskById = (req, res) => {
     return res.status(204).send();
   }
 
-  res.status(404).send('Task did not find');
+  next(createError(404, 'Task did not exist'));
 };

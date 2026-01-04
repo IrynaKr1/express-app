@@ -79,8 +79,8 @@ class TasksDB {
     this.tasks = [...arr];
   }
 
-  getTasks () {
-    return [...this.tasks];
+  getTasks (page, results) {
+    return [...this.tasks.slice((page - 1) * results, page * results)];
   }
 
   getTaskById (id) {
