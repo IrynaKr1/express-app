@@ -1,3 +1,4 @@
+const { validate } = require('./middleware');
 const { tasksController } = require('./controllers');
 
 const express = require('express');
@@ -15,7 +16,7 @@ app.get('/tasks', tasksController.getTasks);
 
 app.get('/tasks/:id', tasksController.getTaskById);
 
-app.post('/tasks', tasksController.createTask);
+app.post('/tasks', validate.validateTaskOnCreate, tasksController.createTask);
 
 app.patch('/tasks/:id', tasksController.updateTaskById);
 
