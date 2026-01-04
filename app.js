@@ -18,7 +18,11 @@ app.get('/tasks/:id', tasksController.getTaskById);
 
 app.post('/tasks', validate.validateTaskOnCreate, tasksController.createTask);
 
-app.patch('/tasks/:id', tasksController.updateTaskById);
+app.patch(
+  '/tasks/:id',
+  validate.validateTaskOnUpdate,
+  tasksController.updateTaskById
+);
 
 app.delete('/tasks/:id', tasksController.deleteTaskById);
 
